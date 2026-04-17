@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="nav-top">
+  Seller Center |
+  <a href="register.html">Register</a>
+  <a href="login.html">Login</a>
+  <a href="add-car.html">Add Car</a>
+</div>
+
+<div class="breadcrumb" style="width: 900px; margin: 0 auto;">
+  <a href="index.html">Homepage</a> / <a href="seller.html">Seller</a> / Login
+</div>
+
+<div class="container">
+
+<h1>Login</h1>
+
+<div class="form-box">
+
+  <p>Username</p>
+  <input type="text" id="username" placeholder="username">
+
+  <p>Password</p>
+  <input type="password" id="password" placeholder="password">
+
+  <br>
+  <button onclick="login()">Login</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    if (username == '') {
+      alert('Please enter username');
+      return;
+    }
+
+    if (password == '') {
+      alert('Please enter password');
+      return;
+    }
+
+    var user = findUser(username, password);
+
+    if (user == null) {
+      alert('Username or password is incorrect');
+      return;
+    }
+
+    loginUser(user);
+
+    alert('Login successful');
+
+    location.href = 'seller.html';
+  }
+
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>
