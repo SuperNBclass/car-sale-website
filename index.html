@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>[Company Name] - Used Car Trading Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="container">
+
+<h1>[One-sentence business summary, approximately 15 words]</h1>
+<p>[Subheading, approximately 30 words]</p>
+<br>
+
+<a href="search.html"><button>Search Cars</button></a>
+<a href="register.html"><button class="btn-gray">Register as Seller</button></a>
+
+<hr style="margin: 30px 0;">
+
+<h2>Platform Introduction</h2>
+<p>[Company introduction, approximately 100 words]</p>
+<br>
+<p>Phone: [Contact Phone] | Email: [Email] | Address: [Company Address]</p>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>
