@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Search Results</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="showResults();">
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="breadcrumb" style="width: 900px; margin: 0 auto;">
+  <a href="index.html">Homepage</a> / <a href="search.html">Search</a> / Results
+</div>
+
+<div class="container">
+
+<h1 id="title">Search Results</h1>
+
+<div id="cars"></div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  function showResults() {
+    var urlParams = new URLSearchParams(location.search);
+
+    var model = urlParams.get('model') || '';
+    var year = urlParams.get('year') || '';
+
+    var cars = searchCars(model, year);
+
+    var title = 'Search Results';
+
+    if (model != '') {
+      title += ': ' + model;
+    }
+
+    if (year != '') {
+      title += ' ' + year;
+    }
+
+    title += ' (' + cars.length + ' cars)';
+
+    document.getElementById('title').innerHTML = title;
+
+    var html = '';
+
+    for (var i = 0; i < cars.length; i++) {
+      var car = cars[i];
+
+      html += '<div class="car-box">';
+      html += '<h3><a href="car-detail.html?id=' + car.id + '">' + car.model + '</a></h3>';
+      html += '<p>Year: ' + car.year + ' | Color: ' + car.color + ' | Location: ' + car.location + '</p>';
+      html += '<p>Seller: ' + car.seller + '</p>';
+      html += '<div class="car-price">¥' + car.price + '</div>';
+      html += '</div>';
+    }
+
+    document.getElementById('cars').innerHTML = html;
+  }
+
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>
