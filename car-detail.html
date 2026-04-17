@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Car Details</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="showDetail();">
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="breadcrumb" style="width: 900px; margin: 0 auto;">
+  <a href="index.html">Homepage</a> / <a href="search.html">Search</a> / <a href="results.html">Results</a> / Details
+</div>
+
+<div class="container">
+
+<div id="detail"></div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  function showDetail() {
+    var urlParams = new URLSearchParams(location.search);
+    var id = urlParams.get('id');
+
+    var car = getCarById(id);
+
+    var detailDiv = document.getElementById('detail');
+
+    if (car == null) {
+      detailDiv.innerHTML = '<p>Car does not exist</p>';
+      return;
+    }
+
+    var html = '';
+
+    html += '<h1>' + car.model + '</h1>';
+
+    html += '<div class="img-box">[Car image 800×600]</div>';
+
+    html += '<div class="car-price">¥' + car.price + '</div>';
+
+    html += '<p>Year: ' + car.year + '</p>';
+    html += '<p>Color: ' + car.color + '</p>';
+    html += '<p>Location: ' + car.location + '</p>';
+    html += '<p>Seller: ' + car.seller + '</p>';
+
+    html += '<br>';
+
+    html += '<a href="results.html"><button>Back</button></a>';
+
+    detailDiv.innerHTML = html;
+  }
+
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>

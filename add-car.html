@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Add Car</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="nav-top">
+  Seller Center |
+  <a href="register.html">Register</a>
+  <a href="login.html">Login</a>
+  <a href="add-car.html">Add Car</a>
+</div>
+
+<div class="breadcrumb" style="width: 900px; margin: 0 auto;">
+  <a href="index.html">Homepage</a> / <a href="seller.html">Seller</a> / Add Car
+</div>
+
+<div class="container">
+
+<h1>Add Car</h1>
+
+<div class="form-box">
+
+  <p>Car Model</p>
+  <input type="text" id="model" placeholder="Toyota Camry">
+
+  <p>Year</p>
+  <input type="number" id="year" placeholder="2022" min="1990" max="2026">
+
+  <p>Color</p>
+  <input type="text" id="color" placeholder="white">
+
+  <p>Location</p>
+  <input type="text" id="location" placeholder="Beijing">
+
+  <p>Price</p>
+  <input type="number" id="price" placeholder="185000" min="1">
+
+  <p>Image</p>
+  <input type="file" id="image">
+
+  <br>
+  <button onclick="addCar()">Publish Car</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  function addCar() {
+    var user = getCurrentUser();
+
+    if (user == null) {
+      alert('Please login first');
+      location.href = 'login.html';
+      return;
+    }
+
+    var model = document.getElementById('model').value;
+    var year = document.getElementById('year').value;
+    var color = document.getElementById('color').value;
+    var location = document.getElementById('location').value;
+    var price = document.getElementById('price').value;
+
+    if (model == '') {
+      alert('Please enter car model');
+      return;
+    }
+
+    if (year == '') {
+      alert('Please enter year');
+      return;
+    }
+
+    if (color == '') {
+      alert('Please enter color');
+      return;
+    }
+
+    if (location == '') {
+      alert('Please enter location');
+      return;
+    }
+
+    if (price == '') {
+      alert('Please enter price');
+      return;
+    }
+
+    saveCar({
+      model: model,
+      year: year,
+      color: color,
+      location: location,
+      price: price,
+      seller: user.username
+    });
+
+    alert('Published successfully');
+
+    location.href = 'search.html';
+  }
+
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>
