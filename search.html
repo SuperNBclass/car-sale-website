@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Search</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <span style="font-size: 18px; font-weight: bold;">[LOGO]</span>
+  <a href="index.html">Homepage</a>
+  <a href="search.html">Search</a>
+  <a href="seller.html">Seller</a>
+  <span id="user-info" style="float: right;"></span>
+</div>
+
+<div class="breadcrumb" style="width: 900px; margin: 0 auto;">
+  <a href="index.html">Homepage</a> / Search
+</div>
+
+<div class="container">
+
+<h1>Search Cars</h1>
+
+<p>
+  Car Model:
+  <input type="text" id="model" style="width: 200px;">
+  Year:
+  <input type="number" id="year" style="width: 100px;" min="1990" max="2026">
+  <button onclick="search()">Search</button>
+</p>
+
+<hr>
+
+<h2>Popular Brands</h2>
+<a href="results.html?model=Toyota"><button style="margin: 5px;">Toyota</button></a>
+<a href="results.html?model=Honda"><button style="margin: 5px;">Honda</button></a>
+<a href="results.html?model=Tesla"><button style="margin: 5px;">Tesla</button></a>
+<a href="results.html?model=BMW"><button style="margin: 5px;">BMW</button></a>
+<a href="results.html"><button style="margin: 5px;">All</button></a>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 [Company Name]. All rights reserved
+</div>
+
+<script src="js/util.js"></script>
+
+<script>
+  function search() {
+    var model = document.getElementById('model').value;
+    var year = document.getElementById('year').value;
+
+    location.href = 'results.html?model=' + model + '&year=' + year;
+  }
+
+  var user = getCurrentUser();
+
+  if (user) {
+    document.getElementById('user-info').innerHTML = 'Logged in: ' + user.username + ' | <a href="#" onclick="logoutUser(); location.href=\'index.html\';">Logout</a>';
+  } else {
+    document.getElementById('user-info').innerHTML = '<a href="login.html">Login</a> | <a href="register.html">Register</a>';
+  }
+</script>
+
+</body>
+</html>
